@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anvil-region-auditor"
+version = "0.1.0"
+description = "Read-only inventory and structural checks for Minecraft Anvil region files"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "vndel" }]
+dependencies = []
+
+[project.scripts]
+anvil-audit = "anvil_auditor.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["anvil_auditor*"]
