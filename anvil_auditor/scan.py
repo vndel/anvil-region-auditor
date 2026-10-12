@@ -11,11 +11,17 @@ def discover_regions(root: Path, include_entities: bool = False, include_poi: bo
         return [("region", root)] if root.suffix == ".mca" else []
     if not root.is_dir():
         raise FileNotFoundError(root)
-    directories = [("region", root / "region")]
-    if include_entities:
-        directories.append(("entities", root / "entities"))
-    if include_poi:
-        directories.append(("poi", root / "poi"))
+
+    directories = []
+    if root.name in {"region", "entities", "poi"}:
+        directories.append((root.name, root))
+    else:
+        directories.append(("region", root / "region"))
+        if include_entities:
+            directories.append(("entities", root / "entities"))
+        if include_poi:
+            directories.append(("poi", root / "poi"))
+
     found = []
     for kind, directory in directories:
         if directory.is_dir():
